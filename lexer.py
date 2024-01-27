@@ -1,5 +1,5 @@
 """
-let five = 5; 
+l et five = 5; 
 let ten = 10; 
 
 let add = fn( x, y) {
@@ -10,37 +10,24 @@ let result = add( five, ten);
 
 """
 
-# TOKENS
+class Lexer:
+    input = None
+    input_length = None
+    position = None
+    read_position = None
+    ch = None
 
-ILLEGAL = "ILLEGAL"
-EOF = "EOF"
+    def __init__(self, source):
+        self.input = source
+        self.input_length = len(input)
+        self.position = 0
+        self.read_position = 1
 
-# Identifiers + literals
-IDENT = "IDENT" # add, x, y
-INT = "INT"
-
-# Operators
-ASSIGN = "="
-PLUS = "+"
-
-# Delimiters
-COMMA = ","
-SEMICOLON = ";"
-
-LPAREN = "("
-RPAREN = ")"
-LBRACE = "{"
-RBRACE = "}"
-
-# Keywords
-FUNCTION = "FUNCTION"
-LET = "LET"
-
-class Token:
-    token_type = ""
-    literal = ""
-
-    def __init__(self, token_type, literal):
-        self.token_type = token_type
-        self.literal = literal
-    
+    def read_char(self):
+        if self.read_position >= self.input_length:
+            self.ch = None
+        else:
+            self.ch = self.input[self.read_position]
+        
+        self.position = self.read_position
+        self.read_position += 1
