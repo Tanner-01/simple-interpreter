@@ -10,7 +10,7 @@ let result = add( five, ten);
 
 """
 
-# TOKENS 
+# TOKENS
 
 ILLEGAL = "ILLEGAL"
 EOF = "EOF"
