@@ -27,8 +27,8 @@ tokens = dict(
 )
 
 class Token:
-    token_type = ""
-    literal = ""
+    token_type = None
+    literal = None
 
     def __init__(self, token_type, literal):
         self.token_type = token_type
