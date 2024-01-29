@@ -21,7 +21,7 @@ class Lexer:
 
     def __init__(self, source):
         self.input = source
-        self.input_length = len(input)
+        self.input_length = len(self.input)
         self.position = -1
         self.read_position = 0
 
