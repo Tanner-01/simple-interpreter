@@ -26,6 +26,11 @@ tokens = dict(
     LET = "LET"
 )
 
+keyword_map = dict(
+    fn = "FUNCTION",
+    let = "LET"
+)
+
 class Token:
     token_type = None
     literal = None
@@ -34,3 +39,8 @@ class Token:
         self.token_type = token_type
         self.literal = literal
     
+    def lookup_identifier(self):
+        if self.literal in keyword_map:
+            self.token_type = tokens[keyword_map[self.literal]]
+        else:
+            self.token_type = tokens["IDENT"]

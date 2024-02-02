@@ -1,15 +1,3 @@
-"""
-l et five = 5; 
-let ten = 10; 
-
-let add = fn( x, y) {
-    x + y; 
-}; 
-
-let result = add( five, ten);
-
-"""
-
 from tokens import *
 
 class Lexer:
@@ -35,9 +23,38 @@ class Lexer:
         
         self.position = self.read_position
         self.read_position += 1
+    
+    def read_identifier(self):
+        identifier = ""
+
+        while self.is_letter(self.ch):
+            identifier += self.ch
+            self.read_char()
+
+        return identifier
+    
+    def is_letter(self, ch):
+        return 'a' <= ch and ch <= 'z' or 'A' <= ch and ch <= 'Z' or ch == '_'
+    
+    def read_integer(self):
+        digits = ""
+
+        while self.ch.isdigit():
+            digits += self.ch
+            self.read_char()
+
+        return int(digits)
+
+    def skip_whitespace(self):
+        while self.ch == ' ' or self.ch == '\t' or self.ch == '\n' or self.ch == '\r':
+            self.read_char()
 
     def next_token(self):
         tok = None
+
+        self.skip_whitespace()
+
+        ps = "CH: " + self.ch
 
         if self.ch == "=":
             tok = Token(tokens["ASSIGN"], self.ch)
@@ -55,8 +72,25 @@ class Lexer:
             tok = Token(tokens["LBRACE"], self.ch)
         elif self.ch == "}":
             tok = Token(tokens["RBRACE"], self.ch)
-        else:
+        elif self.ch == None or self.ch == "":
             tok = Token(tokens["EOF"], "")
+        elif self.is_letter(self.ch):
+            tok = Token(None, self.read_identifier())
+            tok.lookup_identifier()
+            ps += ", T: " + tok.token_type + ", L: " + str(tok.literal)
+            print(ps)
+            return tok
+        elif self.ch.isdigit():
+            tok = Token(tokens["INT"], self.read_integer())
+            ps += ", T: " + tok.token_type + ", L: " + str(tok.literal)
+            print(ps)
+            return tok
+        else:
+            tok = Token(tokens["ILLEGAL"], "ILLEGAL")
         
+        ps += ", T: " + tok.token_type + ", L: " + str(tok.literal)
+        print(ps)
+
         self.read_char()
+
         return tok
