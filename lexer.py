@@ -72,6 +72,28 @@ class Lexer:
             tok = Token(tokens["LBRACE"], self.ch)
         elif self.ch == "}":
             tok = Token(tokens["RBRACE"], self.ch)
+        elif self.ch == "!":
+            tok = Token(tokens["BANG"], self.ch)
+        elif self.ch == "-":
+            tok = Token(tokens["MINUS"], self.ch)
+        elif self.ch == "/":
+            tok = Token(tokens["SLASH"], self.ch)
+        elif self.ch == "*":
+            tok = Token(tokens["ASTERISK"], self.ch)
+        elif self.ch == "<":
+            tok = Token(tokens["LT"], self.ch)
+        elif self.ch == ">":
+            tok = Token(tokens["GT"], self.ch)
+        elif self.ch == "if":
+            tok = Token(tokens["COND_IF"], self.ch)
+        elif self.ch == "else":
+            tok = Token(tokens["COND_ELSE"], self.ch)
+        elif self.ch == "true":
+            tok = Token(tokens["BOOL_TRUE"], self.ch)
+        elif self.ch == "false":
+            tok = Token(tokens["BOOL_FALSE"], self.ch)
+        elif self.ch == "return":
+            tok = Token(tokens["RET"], self.ch)
         elif self.ch == None or self.ch == "":
             tok = Token(tokens["EOF"], "")
         elif self.is_letter(self.ch):

@@ -11,6 +11,12 @@ tokens = dict(
     # Operators
     ASSIGN = "=",
     PLUS = "+",
+    BANG = "!",
+    MINUS = "-",
+    SLASH = "/",
+    ASTERISK = "*",
+    LT = "<",
+    GT = ">",
 
     # Delimiters
     COMMA = ",",
@@ -23,13 +29,23 @@ tokens = dict(
 
     # Keywords
     FUNCTION = "FUNCTION",
-    LET = "LET"
+    LET = "LET",
+    COND_IF = "IF",
+    COND_ELSE = "ELSE",
+    BOOL_TRUE = "TRUE",
+    BOOL_FALSE = "FALSE",
+    RET = "RETURN",
 )
 
-keyword_map = dict(
-    fn = "FUNCTION",
-    let = "LET"
-)
+keyword_map = {
+    "fn": "FUNCTION",
+    "let": "LET",
+    "if" : "COND_IF",
+    "else" : "COND_ELSE", 
+    "true" : "BOOL_TRUE",
+    "false" : "BOOL_FALSE",
+    "return" : "RET",
+}
 
 class Token:
     token_type = None
